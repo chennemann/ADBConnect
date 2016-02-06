@@ -1,0 +1,50 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/default_vertical_margin_x2"
+    android:paddingLeft="@dimen/default_horizontal_margin_x2"
+    android:paddingRight="@dimen/default_horizontal_margin_x2"
+    android:paddingTop="@dimen/default_vertical_margin_x2"
+    tools:context=".MainActivityFragment"
+    tools:showIn="@layout/fragment_main_simple">
+
+    <LinearLayout
+        android:id="@+id/wirelessAdbSwitchWrapper"
+        android:layout_above="@+id/textview_executionCommandsInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_horizontal_margin_x4"
+            android:layout_marginRight="@dimen/default_horizontal_margin_x4"
+            android:text="@string/wireless_adb_switch_label"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <Switch
+            android:id="@+id/switch_wirelessAdb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textview_executionCommandsInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_vertical_margin"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/colorAccent"
+        tools:text="adb connect 192.168.192.61:5555"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivityFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_vertical_margin_x2"
+        android:paddingLeft="@dimen/default_horizontal_margin_x2"
+        android:paddingRight="@dimen/default_horizontal_margin_x2"
+        android:paddingTop="@dimen/default_vertical_margin_x2">
+
+        <LinearLayout
+            android:id="@+id/wirelessAdbSwitchWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:layout_marginTop="@dimen/default_vertical_margin_x4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_horizontal_margin_x4"
+                android:layout_marginRight="@dimen/default_horizontal_margin_x4"
+                android:text="@string/wireless_adb_switch_label"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <Switch
+                android:id="@+id/switch_wirelessAdb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textview_applicationStateInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wirelessAdbSwitchWrapper"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/default_vertical_margin_x8"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorAccent"
+            tools:text="@string/adb_over_wifi_disabled_no_root_application_state_information"/>
+
+        <TextView
+            android:id="@+id/textview_executionSourceInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_applicationStateInformation"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="@dimen/default_vertical_margin"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="@string/adb_over_wifi_disabled_no_root_execution_source_information"/>
+
+
+        <TextView
+            android:id="@+id/textview_executionCommandsInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_executionSourceInformation"
+            android:layout_centerHorizontal="true"
+            android:gravity="start"
+            tools:text="1. Connect your device with your computer\n2. Enter command into command Line:\n\t\t\t\t\tadb tcpip 5555\n\t\t\t\t\tadb connect 192.168.178.21:5555\n3. Disconnect your device\n4. Enjoy!!!"/>
+
+
+    </RelativeLayout>
+</ScrollView>

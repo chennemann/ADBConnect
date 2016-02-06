@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="service_action_network_connected" translatable="false">wifi_network_connected</string>
+    <string name="service_action_network_not_connected" translatable="false">wifi_network_not_connected</string>
+    <string name="service_action_start_adb_over_wifi" translatable="false">start_adb_over_wifi</string>
+    <string name="service_action_start_adb_over_wifi_label">Start </string>
+    <string name="service_action_stop_adb_over_wifi" translatable="false">stop_adb_over_wifi</string>
+    <string name="service_action_stop_adb_over_wifi_label">Stop </string>
+</resources>

@@ -1,0 +1,33 @@
+<resources
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name" translatable="false">ADB Connect</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="activity_label_settings">Settings</string>
+    <string name="activity_label_main">ADB Connect</string>
+    
+    <string name="connect_to_device_command" translatable="false">adb connect <xliff:g id="ip" example="192.168.178.21:5555">%1$s</xliff:g></string>
+    <string name="wireless_adb_switch_label">ADB over WIFI</string>
+    <string name="no_root_permissions_granted">Could not obtain root permissions to toggle ADB over WIFI automatically</string>
+
+    <string name="purchase_dialog_title">Thanks for supporting development</string>
+    <string name="purchase_dialog_message">The final amount in your local currency will be displayed through Google Play.\nI really appreciate your donation. Thank you very much.</string>
+    <string name="purchase_dialog_disclaimer_message">With this donation you get no extra functionality, but you greatly support further development of this and other applications.</string>
+    <string name="purchase_dialog_positive_button">Donate</string>
+    <string name="purchase_dialog_negative_button">Cancel</string>
+
+    <string name="donation_single_level_one_title">Cup of Coffee</string>
+    <string name="donation_single_level_one_description">This will keep me awake while fixing some bugs.</string>
+    <string name="donation_single_level_one_sku" translatable="false">de.androidbytes.adbconnect.donation.single.level.one</string>
+
+    <string name="donation_single_level_two_title">Tasty Sandwich</string>
+    <string name="donation_single_level_two_description">Now I can work really long on fixing bugs.</string>
+    <string name="donation_single_level_two_sku" translatable="false">de.androidbytes.adbconnect.donation.single.level.two</string>
+
+    <string name="donation_single_level_three_title">Sandwich and Coffee</string>
+    <string name="donation_single_level_three_description">I have a lot of Energy now to implement some cool, new features.</string>
+    <string name="donation_single_level_three_sku" translatable="false">de.androidbytes.adbconnect.donation.single.level.three</string>
+    <string name="pref_should_display_donation_button_summary_off">The Donation Button won\'t be shown. Thanks for your support</string>
+    <string name="pref_contact_developer_share_dialog_title">Send mail…</string>
+</resources>

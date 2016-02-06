@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="seekbar_dialog_preference">
+        <attr name="maxValue" format="integer" />
+        <attr name="minValue" format="integer" />
+        <attr name="defaultValue" format="integer" />
+        <attr name="unit" format="string" />
+    </declare-styleable>
+</resources>

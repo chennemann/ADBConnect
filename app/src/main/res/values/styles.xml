@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppStyle.ToolbarTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/toolbar_title_text_size</item>
+    </style>
+
+
+    <style name="purchase_dialog" parent="AppTheme.Dialog.Alert">
+    </style>
+
+</resources>

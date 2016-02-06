@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="application_preferences" translatable="false">adbConnectPreferences</string>
+
+    <string name="pref_category_general_settings_title">General Settings</string>
+    <string name="pref_category_general_settings_key" translatable="false">category_general_settings_key</string>
+
+    <string name="pref_category_service_settings_title">ADB Connect Service Settings</string>
+    <string name="pref_category_service_settings_key" translatable="false">category_service_settings_key</string>
+
+    <string name="pref_category_notification_settings_title">Notification Settings</string>
+    <string name="pref_category_notification_settings_key" translatable="false">category_notification_settings_key</string>
+
+    <string name="pref_category_connection_settings_title">Connection Settings</string>
+    <string name="pref_category_connection_settings_key" translatable="false">category_connection_settings_key</string>
+
+    <string name="pref_category_about_title">About</string>
+    <string name="pref_category_about_key" translatable="false">category_about_key</string>
+
+
+
+    <string name="pref_use_simplified_layout_key" translatable="false">use_simplified_layout_key</string>
+    <string name="pref_use_simplified_layout_title">Simplified Layout</string>
+    <bool name="pref_use_simplified_layout_default_value">true</bool>
+    <string name="pref_use_simplified_layout_summary_on">A simplified layout will be used</string>
+    <string name="pref_use_simplified_layout_summary_off">The default layout will be used</string>
+
+    <string name="pref_use_root_key" translatable="false">use_root_key</string>
+    <string name="pref_use_root_title">Root Mode</string>
+    <bool name="pref_use_root_key_default_value">true</bool>
+    <string name="pref_use_root_summary_on">Root permissions will be used to enable or disable ADB over Wifi automatically</string>
+    <string name="pref_use_root_summary_off">ADB over Wifi has to be enabled manually.</string>
+
+    <string name="pref_autostart_on_known_wifi_key" translatable="false">autostart_on_known_wifi_key</string>
+    <string name="pref_autostart_on_known_wifi_title">Autostart ADB over WIFI</string>
+    <bool name="pref_autostart_on_known_wifi_default_value">false</bool>
+    <string name="pref_autostart_on_known_wifi_summary_on">ADB over WIFI will be started on trusted Networks</string>
+    <string name="pref_autostart_on_known_wifi_summary_off">ADB over WIFI won\'t be started on trusted Networks</string>
+    
+    <string name="pref_listen_on_dynamic_port_key" translatable="false">listen_on_adb_tcp_port_key</string>
+    <string name="pref_listen_on_dynamic_port_title">Wireless ADB Port</string>
+    <integer name="pref_listen_on_dynamic_port_default_value">5555</integer>
+    <integer name="pref_notification_priority_default_value">5</integer>
+    <integer name="pref_usage_count_default_value">0</integer>
+    <string name="pref_listen_on_dynamic_port_summary">The Port ADB should listen on can be set to anything between 5000 and 6000</string>
+
+    <string name="pref_show_notification_key" translatable="false">show_notification_key</string>
+    <string name="pref_show_notification_title">Show Interactive Notification</string>
+    <bool name="pref_show_notification_default_value">true</bool>
+    <string name="pref_show_notification_summary_on">Show Notification on trusted Networks</string>
+    <string name="pref_show_notification_summary_off">No Notification will be displayed</string>
+
+    <string name="pref_persistent_notification_key" translatable="false">persistent_notification_key</string>
+    <string name="pref_persistent_notification_title">Persistent Notification</string>
+    <bool name="pref_persistent_notification_default_value">true</bool>
+    <string name="pref_persistent_notification_summary_on">The Notification will be persistent</string>
+    <string name="pref_persistent_notification_summary_off">You can swipe away the Notification</string>
+
+    <string name="pref_trusted_networks_key" translatable="false">trusted_networks_key</string>
+    <string name="pref_trusted_networks_title">Trusted Networks</string>
+    <string name="pref_trusted_networks_summary">Select known networks</string>
+    <string name="pref_trusted_networks_summary_error">Please enable WIFI to show your trusted networks</string>
+
+    <string name="pref_notification_priority_key" translatable="false">notification_priority_key</string>
+    <string name="pref_notification_priority_title">Notification Priority</string>
+    <string name="pref_notification_priority_summary">Set the Notification Priority</string>
+
+    <string name="pref_show_only_on_adb_over_wifi_active_key" translatable="false">show_only_on_adb_over_wifi_active_key</string>
+    <string name="pref_show_on_adb_over_wifi_active_title">Show only on ADB over WIFI</string>
+    <bool name="pref_show_on_adb_over_wifi_active_default_value">true</bool>
+    <string name="pref_show_on_adb_over_wifi_active_summary_on">Notification will only be displayed when ADB over WIFI is active</string>
+    <string name="pref_show_on_adb_over_wifi_active_summary_off">Notification will be displayed when all Requirements are met to toggle ADB over WIFI</string>
+
+    <string name="pref_layout_changed_key" translatable="false">layout_changed_key</string>
+    <bool name="pref_layout_changed_default_value">false</bool>
+
+    <string name="pref_has_already_rated_key" translatable="false">has_already_rated_key</string>
+
+    <string name="pref_usage_count_key" translatable="false">usage_count_key</string>
+
+    <string name="pref_rate_application_key" translatable="false">rate_application_key</string>
+    <string name="pref_rate_application_title">Rate Application</string>
+    <string name="pref_rate_application_summary">Help me by rating the application</string>
+
+    <string name="pref_show_advanced_settings_key" translatable="false">show_advanced_settings_key</string>
+    <string name="pref_show_advanced_settings_title">Show Advanced Settings</string>
+    <bool name="pref_show_advanced_settings_default_value">false</bool>
+    <string name="pref_show_advanced_settings_summary_on">Advanced Settings are displayed</string>
+    <string name="pref_show_advanced_settings_summary_off">Advanced Settings are hidden</string>
+
+    <string name="pref_persistent_only_if_adb_over_wifi_active_key" translatable="false">persistent_only_if_adb_over_wifi_active_key</string>
+    <string name="pref_persistent_only_if_adb_over_wifi_active_title">Persist only on ADB over WIFI</string>
+    <bool name="pref_persistent_only_if_adb_over_wifi_active_default_value">true</bool>
+    <string name="pref_persistent_only_if_adb_over_wifi_active_summary_on">The Notification will only be persistent if the ADB over WIFI Service is active</string>
+    <string name="pref_persistent_only_if_adb_over_wifi_active_summary_off">The Notification will always be persistent</string>
+
+    <string name="pref_user_has_donated_key" translatable="false">user_has_donated_key</string>
+    <bool name="pref_user_has_donated_default_value">false</bool>
+
+    <string name="pref_should_display_donation_button_key" translatable="false">should_display_donation_button_key</string>
+    <string name="pref_should_display_donation_button_title">Show Donation Button</string>
+    <bool name="pref_should_display_donation_button_default_value">true</bool>
+    <string name="pref_should_display_donation_button_summary_on">The Donation Button will be shown. Thanks for your support</string>
+
+
+    <string name="pref_contact_developer_key" translatable="false">pref_contact_developer_key</string>
+    <string name="pref_contact_developer_title">Contact me</string>
+    <string name="pref_contact_developer_summary">Have questions? Drop me a line</string>
+    <string name="pref_contact_developer_error_message">No Email Client installed</string>
+
+</resources>

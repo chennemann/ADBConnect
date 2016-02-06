@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:key="@string/pref_category_general_settings_key"
+        android:title="@string/pref_category_general_settings_title" >
+
+        <CheckBoxPreference
+            android:key="@string/pref_use_simplified_layout_key"
+            android:title="@string/pref_use_simplified_layout_title"
+            android:defaultValue="@bool/pref_use_simplified_layout_default_value"
+            android:summaryOn="@string/pref_use_simplified_layout_summary_on"
+            android:summaryOff="@string/pref_use_simplified_layout_summary_off" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_use_root_key"
+            android:title="@string/pref_use_root_title"
+            android:defaultValue="@bool/pref_use_root_key_default_value"
+            android:summaryOn="@string/pref_use_root_summary_on"
+            android:summaryOff="@string/pref_use_root_summary_off" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_show_advanced_settings_key"
+            android:title="@string/pref_show_advanced_settings_title"
+            android:defaultValue="@bool/pref_show_advanced_settings_default_value"
+            android:summaryOn="@string/pref_show_advanced_settings_summary_on"
+            android:summaryOff="@string/pref_show_advanced_settings_summary_off" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_category_service_settings_key"
+        android:title="@string/pref_category_service_settings_title">
+
+        <CheckBoxPreference
+            android:key="@string/pref_autostart_on_known_wifi_key"
+            android:title="@string/pref_autostart_on_known_wifi_title"
+            android:dependency="@string/pref_use_root_key"
+            android:defaultValue="@bool/pref_autostart_on_known_wifi_default_value"
+            android:summaryOn="@string/pref_autostart_on_known_wifi_summary_on"
+            android:summaryOff="@string/pref_autostart_on_known_wifi_summary_off" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_category_connection_settings_key"
+        android:title="@string/pref_category_connection_settings_title" >
+
+        <net.xpece.android.support.preference.MultiSelectListPreference
+            android:key="@string/pref_trusted_networks_key"
+            android:title="@string/pref_trusted_networks_title"
+            android:summary="@string/pref_trusted_networks_summary"
+            />
+
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="@string/pref_listen_on_dynamic_port_key"
+            android:title="@string/pref_listen_on_dynamic_port_title"
+            android:defaultValue="@integer/pref_listen_on_dynamic_port_default_value"
+            android:summary="@string/pref_listen_on_dynamic_port_summary"
+            app:msbp_minValue="5000"
+            app:msbp_maxValue="6000"
+            app:msbp_interval="1"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_category_notification_settings_key"
+        android:title="@string/pref_category_notification_settings_title">
+
+        <CheckBoxPreference
+        android:key="@string/pref_show_notification_key"
+        android:title="@string/pref_show_notification_title"
+        android:defaultValue="@bool/pref_show_notification_default_value"
+        android:summaryOn="@string/pref_show_notification_summary_on"
+        android:summaryOff="@string/pref_show_notification_summary_off" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_show_only_on_adb_over_wifi_active_key"
+            android:title="@string/pref_show_on_adb_over_wifi_active_title"
+            android:dependency="@string/pref_show_notification_key"
+            android:defaultValue="@bool/pref_show_on_adb_over_wifi_active_default_value"
+            android:summaryOn="@string/pref_show_on_adb_over_wifi_active_summary_on"
+            android:summaryOff="@string/pref_show_on_adb_over_wifi_active_summary_off" />
+
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="@string/pref_notification_priority_key"
+            android:title="@string/pref_notification_priority_title"
+            android:defaultValue="@integer/pref_notification_priority_default_value"
+            android:summary="@string/pref_notification_priority_summary"
+            android:dependency="@string/pref_show_notification_key"
+            app:msbp_minValue="1"
+            app:msbp_maxValue="5"
+            app:msbp_interval="1"
+            />
+
+        <CheckBoxPreference
+            android:key="@string/pref_persistent_notification_key"
+            android:title="@string/pref_persistent_notification_title"
+            android:dependency="@string/pref_show_notification_key"
+            android:defaultValue="@bool/pref_persistent_notification_default_value"
+            android:summaryOn="@string/pref_persistent_notification_summary_on"
+            android:summaryOff="@string/pref_persistent_notification_summary_off" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_persistent_only_if_adb_over_wifi_active_key"
+            android:title="@string/pref_persistent_only_if_adb_over_wifi_active_title"
+            android:dependency="@string/pref_persistent_notification_key"
+            android:defaultValue="@bool/pref_persistent_only_if_adb_over_wifi_active_default_value"
+            android:summaryOn="@string/pref_persistent_only_if_adb_over_wifi_active_summary_on"
+            android:summaryOff="@string/pref_persistent_only_if_adb_over_wifi_active_summary_off"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="@string/pref_category_about_key"
+        android:title="@string/pref_category_about_title">
+
+        <Preference
+            android:key="@string/pref_rate_application_key"
+            android:title="@string/pref_rate_application_title"
+            android:summary="@string/pref_rate_application_summary" />
+
+        <Preference
+            android:key="@string/pref_contact_developer_key"
+            android:title="@string/pref_contact_developer_title"
+            android:summary="@string/pref_contact_developer_summary" />
+
+        <CheckBoxPreference
+            android:key="@string/pref_should_display_donation_button_key"
+            android:title="@string/pref_should_display_donation_button_title"
+            android:defaultValue="@bool/pref_should_display_donation_button_default_value"
+            android:summaryOn="@string/pref_should_display_donation_button_summary_on"
+            android:summaryOff="@string/pref_should_display_donation_button_summary_off" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

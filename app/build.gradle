@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    def dependencies = rootProject.ext.dependencies
+
+    apt dependencies.daggerCompiler
+    compile dependencies.dagger
+    provided dependencies.javaxAnnotation
+
+    compile dependencies.otto
+
+    compile dependencies.butterKnife
+
+    compile dependencies.rxJava
+    compile dependencies.rxAndroid
+
+    compile dependencies.trikitaLog
+
+    provided dependencies.lombok
+
+    compile dependencies.libsuperuser
+
+    compile dependencies.androidSupportAppCompatLibrary
+    compile dependencies.androidSupportV4Library
+    compile dependencies.androidSupportDesignLibrary
+
+    compile dependencies.seekBarPreference
+    compile dependencies.supportPreference
+}

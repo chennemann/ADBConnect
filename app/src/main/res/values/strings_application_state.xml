@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
+
+    <!-- APPLICATION_STATE_EMPTY-->
+    <string name="empty_application_state_information" translatable="false">""</string>
+    <string name="empty_execution_source_information" translatable="false">""</string>
+    <string name="empty_execution_commands_information" translatable="false">""</string>
+    <string name="empty_execution_commands_information_simple" translatable="false">""</string>
+
+    <!-- APPLICATION_STATE_ADB_OVER_WIFI_ENABLED -->
+    <string name="adb_over_wifi_enabled_application_state_information">adb service is running</string>
+    <string name="adb_over_wifi_enabled_execution_source_information">run on your computer</string>
+    <string name="adb_over_wifi_enabled_execution_commands_information" translatable="false">adb connect <xliff:g id="ip" example="192.168.178.21">%1$s</xliff:g>:<xliff:g id="port" example="5555">%2$s</xliff:g></string>
+    <string name="adb_over_wifi_enabled_execution_commands_information_simple" translatable="false">adb connect <xliff:g id="ip" example="192.168.178.21">%1$s</xliff:g>:<xliff:g id="port" example="5555">%2$s</xliff:g></string>
+
+    <!-- APPLICATION_STATE_ADB_OVER_WIFI_DISABLED -->
+    <string name="adb_over_wifi_disabled_application_state_information">adb service not running</string>
+    <string name="adb_over_wifi_disabled_execution_source_information" translatable="false">""</string>
+    <string name="adb_over_wifi_disabled_execution_commands_information" translatable="false">""</string>
+    <string name="adb_over_wifi_disabled_execution_commands_information_simple" translatable="false">""</string>
+    <string name="adb_over_wifi_disabled_execution_commands_information_notification">"ADB over Wifi is currently disabled"</string>
+
+    <!-- APPLICATION_STATE_ADB_OVER_WIFI_ENABLED_NO_ROOT -->
+    <string name="adb_over_wifi_enabled_no_root_application_state_information">adb service is running</string>
+    <string name="adb_over_wifi_enabled_no_root_execution_source_information">run on your computer</string>
+    <string name="adb_over_wifi_enabled_no_root_execution_commands_information" translatable="false">
+        adb connect <xliff:g id="ip" example="192.168.178.21">%1$s</xliff:g>:<xliff:g id="port" example="5555">%2$s</xliff:g>\n
+        to connect wirelessly with your smartphone\n\n
+
+        or \t\t\t\t\t adb usb\n
+        to disable adb over wifi
+    </string>
+    <string name="adb_over_wifi_enabled_no_root_execution_commands_information_simple" translatable="false">adb connect <xliff:g id="ip" example="192.168.178.21">%1$s</xliff:g>:<xliff:g id="port" example="5555">%2$s</xliff:g></string>
+
+    <!-- APPLICATION_STATE_ADB_OVER_WIFI_DISABLED_NO_ROOT -->
+    <string name="adb_over_wifi_disabled_no_root_application_state_information">adb service not running</string>
+    <string name="adb_over_wifi_disabled_no_root_execution_source_information">run on your computer</string>
+    <string name="adb_over_wifi_disabled_no_root_execution_commands_information">
+        1. Connect your device with your computer\n
+        2. Enter command into command Line:\n
+            \t\t\t\t\tadb tcpip <xliff:g id="port" example="5555">%1$s</xliff:g>\n
+            \t\t\t\t\tadb connect <xliff:g id="ip" example="192.168.178.21">%2$s</xliff:g>:<xliff:g id="port" example="5555">%3$s</xliff:g>\n
+        3. Disconnect your device\n
+        4. Enjoy!!!
+    </string>
+    <string name="adb_over_wifi_disabled_no_root_execution_commands_information_simple" translatable="false">adb tcpip <xliff:g id="port" example="5555">%1$s</xliff:g></string>
+
+    <!-- APPLICATION_STATE_WIFI_TURNED_OFF-->
+    <string name="wifi_turned_off_application_state_information">wifi is disabled</string>
+    <string name="wifi_turned_off_execution_source_information">run on device</string>
+    <string name="wifi_turned_off_execution_commands_information">
+        1. Go to your phone\'s settings\n
+        2. Enter WIFI Options\n
+        3. Enable WIFI\n
+        4. Connect to a network\n
+        5. Come Back…
+    </string>
+    <string name="wifi_turned_off_execution_commands_information_simple">WIFI is disabled</string>
+
+    <!-- APPLICATION_STATE_WIFI_NOT_CONNECTED-->
+    <string name="wifi_not_connected_application_state_information">wifi is not connected</string>
+    <string name="wifi_not_connected_execution_source_information">run on device</string>
+    <string name="wifi_not_connected_execution_commands_information">
+        1. Go to your phone\'s settings\n
+        2. Enter WIFI Options\n
+        3. Connect to a network\n
+        4. Come Back…
+    </string>
+    <string name="wifi_not_connected_execution_commands_information_simple">Please connect to a WIFI network</string>
+
+    <!-- DEVELOPER_OPTIONS_DISABLED-->
+    <string name="developer_options_disabled_application_state_information">usb debugging disabled</string>
+    <string name="developer_options_disabled_execution_source_information">run on device</string>
+    <string name="developer_options_disabled_execution_commands_information">
+        1. Go to your phone\'s settings\n
+        2. Enter the about phone section\n
+        3. Scroll down to Build number\n
+        4. Click Build number multiple times\n
+        5. Go back and enter developer options\n
+        6. Enable USB Debugging\n
+        7. Come Back…
+    </string>
+    <string name="developer_options_disabled_execution_commands_information_simple">USB Debugging is disabled</string>
+
+    <!-- USB_DEBUGGING_DISABLED-->
+    <string name="usb_debugging_disabled_application_state_information">usb debugging disabled</string>
+    <string name="usb_debugging_disabled_execution_source_information">run on device</string>
+    <string name="usb_debugging_disabled_execution_commands_information">
+        1. Go to your phone\'s settings\n
+        2. Enter developer options\n
+        3. Enable USB Debugging\n
+        4. Come Back…
+    </string>
+    <string name="usb_debugging_disabled_execution_commands_information_simple">USB Debugging is disabled</string>
+</resources>

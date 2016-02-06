@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="default_horizontal_margin">8dp</dimen>
+    <dimen name="default_horizontal_margin_x2">16dp</dimen>
+    <dimen name="default_horizontal_margin_x4">32dp</dimen>
+    <dimen name="default_horizontal_margin_x6">48dp</dimen>
+    <dimen name="default_horizontal_margin_x8">64dp</dimen>
+    <dimen name="default_vertical_margin">8dp</dimen>
+    <dimen name="default_vertical_margin_x2">16dp</dimen>
+    <dimen name="default_vertical_margin_x4">32dp</dimen>
+    <dimen name="default_vertical_margin_x6">48dp</dimen>
+    <dimen name="default_vertical_margin_x8">64dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Action Bar Dimensions -->
+    <dimen name="action_bar_size">56dp</dimen>
+    <dimen name="action_bar_size_x2">112dp</dimen>
+    <dimen name="action_bar_size_x3">168dp</dimen>
+
+    <dimen name="toolbar_title_text_size">28sp</dimen>
+</resources>
