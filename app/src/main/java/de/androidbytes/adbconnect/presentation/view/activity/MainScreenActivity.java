@@ -21,18 +21,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import butterknife.Bind;
 import de.androidbytes.adbconnect.R;
 import de.androidbytes.adbconnect.presentation.di.HasComponent;
 import de.androidbytes.adbconnect.presentation.di.components.DaggerMainScreenComponent;
 import de.androidbytes.adbconnect.presentation.di.components.MainScreenComponent;
 import de.androidbytes.adbconnect.presentation.utils.PreferenceUtility;
-import de.androidbytes.adbconnect.presentation.view.fragment.InAppBillingFragment;
 import trikita.log.Log;
 
 
@@ -125,21 +122,6 @@ public class MainScreenActivity extends BaseActivity implements HasComponent<Mai
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_main_screen);
-        boolean handled = false;
-
-        if(fragment instanceof InAppBillingFragment) {
-            handled = ((InAppBillingFragment) fragment).handleInAppBillingResult(requestCode, resultCode, data);
-        }
-
-        if(!handled) {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @Override

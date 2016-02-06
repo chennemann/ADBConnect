@@ -16,17 +16,11 @@
 package de.androidbytes.adbconnect.presentation.presenter;
 
 
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ListView;
-import com.android.vending.billing.IInAppBillingService;
 import com.squareup.otto.Subscribe;
-import de.androidbytes.adbconnect.R;
 import de.androidbytes.adbconnect.domain.interactor.result.AdbStateEnum;
 import de.androidbytes.adbconnect.domain.interactor.result.ConnectionInformation;
 import de.androidbytes.adbconnect.presentation.di.OperatorScope;
@@ -36,14 +30,10 @@ import de.androidbytes.adbconnect.presentation.eventbus.events.CurrentIpAddressE
 import de.androidbytes.adbconnect.presentation.eventbus.events.ServiceConnectionStateChangedEvent;
 import de.androidbytes.adbconnect.presentation.eventbus.events.WirelessAdbStateEvaluatedEvent;
 import de.androidbytes.adbconnect.presentation.services.WirelessAdbManagingService;
-import de.androidbytes.adbconnect.presentation.utils.*;
-import de.androidbytes.adbconnect.presentation.utils.billing.IabHelper;
-import de.androidbytes.adbconnect.presentation.utils.billing.IabResult;
-import de.androidbytes.adbconnect.presentation.utils.billing.Inventory;
-import de.androidbytes.adbconnect.presentation.utils.billing.Purchase;
+import de.androidbytes.adbconnect.presentation.utils.PreferenceUtility;
+import de.androidbytes.adbconnect.presentation.utils.ServiceUtility;
 import de.androidbytes.adbconnect.presentation.view.ApplicationState;
 import de.androidbytes.adbconnect.presentation.view.ViewInterface;
-import de.androidbytes.adbconnect.presentation.view.dialogs.PurchaseItemAdapter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -66,7 +56,7 @@ import static de.androidbytes.adbconnect.presentation.view.ApplicationState.*;
 @Accessors(prefix = "m")
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinishedListener, IabHelper.OnIabPurchaseFinishedListener, IabHelper.QueryInventoryFinishedListener, IabHelper.OnConsumeFinishedListener {
+public class MainScreenPresenter implements Presenter {
 
     private Context mApplicationContext;
     private EventBus mEventBus;
@@ -99,31 +89,6 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
         }
     };
 
-    private IInAppBillingService mInAppBillingService;
-    private IabHelper mInAppBillingHelper;
-    private boolean mInAppBillingReady;
-    private boolean mPurchaseButtonClickedWhileNotReady;
-    private int mSelectedSkuIndex;
-    private String mPurchasedSku = "";
-    private ServiceConnection mInAppBillingServiceConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder binder) {
-
-            Log.i("InAppBillingService connected to MainScreenPresenter");
-            setInAppBillingService(IInAppBillingService.Stub.asInterface(binder));
-            setupInAppBilling();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-            Log.i("InAppBillingService disconnected");
-            invalidateInAppBillingServiceBinding();
-        }
-    };
-
-
     @Inject
     public MainScreenPresenter(Context context, EventBus eventBus) {
 
@@ -152,34 +117,10 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
         }
     }
 
-    /**
-     * Use the {@link ServiceConnection} to bind the {@link MainScreenPresenter} to a specified {@link ServiceConnection}
-     */
-    private void establishInAppBillingServiceBinding() {
-
-        Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
-        serviceIntent.setPackage("com.android.vending");
-        getApplicationContext().bindService(serviceIntent, getInAppBillingServiceConnection(), Context.BIND_AUTO_CREATE);
-    }
-
-    /**
-     * Use the {@link ServiceConnection} to unbind the {@link MainScreenPresenter} from the {@link WirelessAdbManagingService}
-     */
-    private void invalidateInAppBillingServiceBinding() {
-
-        if (ServiceUtility.unbindService(getApplicationContext(), getInAppBillingServiceConnection())) {
-            setInAppBillingService(null);
-        }
-    }
 
     private boolean isWirelessAdbManagingServiceBound() {
 
         return null != getWirelessAdbManagingService();
-    }
-
-    private boolean isInAppBillingServiceBound() {
-
-        return null != getInAppBillingService();
     }
 
     private void checkRequirements() {
@@ -217,14 +158,6 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
             checkRequirements();
         }
 
-        if (!isInAppBillingServiceBound()) {
-            Log.i("Attempt to bind InAppBillingService");
-            establishInAppBillingServiceBinding();
-        } else {
-            Log.i("InAppBillingService already bound");
-            setupInAppBilling();
-        }
-
         getEventBus().register(this);
     }
 
@@ -240,29 +173,12 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
         if (isWirelessAdbManagingServiceBound()) {
             invalidateWirelessAdbManagingServiceBinding();
         }
-
-        if (isInAppBillingServiceBound()) {
-            invalidateInAppBillingServiceBinding();
-        }
     }
 
     //endregion
 
 
 //region View Interaction Handler
-
-
-    public void actionButtonClicked(View view) {
-        if(view.getId() == R.id.fab_actionButton) {
-            Log.i("Purchase Button Clicked");
-
-            if (isInAppBillingReady()) {
-                displayPurchaseDialog();
-            } else {
-                setPurchaseButtonClickedWhileNotReady(true);
-            }
-        }
-    }
 
     public void wirelessAdbSwitchClicked(boolean isChecked) {
 
@@ -393,113 +309,4 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
 
 //endregion
 
-
-//    region InAppBilling
-
-    public boolean isInAppBillingResult(int requestCode, int resultCode, Intent data) {
-
-        return getInAppBillingHelper().handleActivityResult(requestCode, resultCode, data);
-    }
-
-
-    private void setupInAppBilling() {
-
-        String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6BumlCHyyY+LbGk/LRoUCAIekxT29F0gJyIiZvt26g1m2Bophqv1WL/Wm6m+0ipyHOlyO6B9PBOdRa0OgKStNWq9GHPTccMT3geJn+t/yEJPEfbsfTRHiJmB09ismptVW4D1sCkmfd4YbMjw9FaM32kBjpKGE8ivZLpa+6F88Iyi4Rtx/ZBxU3ZCNOzufmzIE93QTrFsjbEzhXXbsbAyF8KxRiJ7KnhAvAaqvMZtneqcUSlrEg27SqqnFODw8obBJHssWzyR+veH45ba1+Kc4Gt8vQsQfcy3y5kESgUs0sUoxzAvKxugJq675lWVUVg8A6AkXOHtwbn+jKXSOubitwIDAQAB";
-
-        mInAppBillingHelper = new IabHelper(getApplicationContext(), base64EncodedPublicKey);
-
-        getInAppBillingHelper().startSetup(this);
-    }
-
-    private void displayPurchaseDialog() {
-
-        setPurchaseButtonClickedWhileNotReady(false);
-
-        Context activityContext = ((Fragment) getView()).getActivity();
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(activityContext);
-        dialog.setTitle(activityContext.getString(R.string.purchase_dialog_title));
-
-        View customDialogView = LayoutInflater.from(activityContext).inflate(R.layout.alertdialog_purchase_item_dialog, null, false);
-        ListView listView = (ListView) customDialogView.findViewById(R.id.listview_purchase_items);
-
-        final PurchaseItemAdapter adapter = new PurchaseItemAdapter(activityContext, R.layout.alertdialog_purchase_item_list_item_layout, InAppBillingUtility.getAvailableSkus(getApplicationContext()));
-        listView.setAdapter(adapter);
-        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        listView.setDivider(null);
-
-        dialog.setView(customDialogView);
-        dialog.setPositiveButton(activityContext.getString(R.string.purchase_dialog_positive_button), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                Sku selectedSku = InAppBillingUtility.getSkuAtIndex(adapter.getSelectedIndex());
-                if (selectedSku != null) {
-                    setPurchasedSku(selectedSku.getSku());
-                    getInAppBillingHelper().launchPurchaseFlow(((Fragment) getView()).getActivity(), selectedSku.getSku(), 1, MainScreenPresenter.this);
-                }
-            }
-        });
-        dialog.setNegativeButton(activityContext.getString(R.string.purchase_dialog_negative_button), null);
-        dialog.show();
-    }
-
-    private void consumeItem() {
-
-        getInAppBillingHelper().queryInventoryAsync(this);
-    }
-
-    @Override
-    public void onIabPurchaseFinished(IabResult result, Purchase info) {
-
-        if (result.isFailure()) {
-            Log.d("Purchase failed");
-        } else if (result.isSuccess()) {
-            Log.i("Purchase successfully completed");
-            consumeItem();
-            PreferenceUtility.hasUserDonated(getApplicationContext(), true);
-            InteractionUtility.showSnackbar(getView().getRoot(), "Thank you for supporting Development", Snackbar.LENGTH_LONG);
-        }
-
-    }
-
-    @Override
-    public void onIabSetupFinished(IabResult result) {
-
-        if (!result.isSuccess()) {
-            Log.d("In-App-Billing Setup Failed: " + result);
-            setInAppBillingReady(false);
-        } else {
-            Log.i("In-App-Billing Setup OK");
-            setInAppBillingReady(true);
-
-            if (isPurchaseButtonClickedWhileNotReady()) {
-                displayPurchaseDialog();
-            }
-        }
-    }
-
-    @Override
-    public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-
-        if (result.isSuccess()) {
-            Log.i("Inventory queried successfully");
-            getInAppBillingHelper().consumeAsync(inventory.getPurchase(getPurchasedSku()), this);
-        } else {
-            Log.i("Inventory query failed");
-        }
-    }
-
-    @Override
-    public void onConsumeFinished(Purchase purchase, IabResult result) {
-
-        if (result.isSuccess()) {
-            Log.i("Purchase consumed successfully");
-        } else {
-            Log.i("Puchase could not consumed successfully");
-        }
-    }
-
-//    endregion
 }

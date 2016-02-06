@@ -16,10 +16,8 @@
 package de.androidbytes.adbconnect.presentation.view.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +27,6 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
 import de.androidbytes.adbconnect.R;
 import de.androidbytes.adbconnect.presentation.di.components.MainScreenComponent;
 import de.androidbytes.adbconnect.presentation.presenter.MainScreenPresenter;
@@ -49,7 +46,7 @@ import javax.inject.Inject;
 @Accessors(prefix = "m")
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
-public class MainScreenFragment extends BaseFragment implements ViewInterface, InAppBillingFragment {
+public class MainScreenFragment extends BaseFragment implements ViewInterface {
 
     @Inject
     @Getter(AccessLevel.PUBLIC)
@@ -69,10 +66,6 @@ public class MainScreenFragment extends BaseFragment implements ViewInterface, I
     @Bind(R.id.switch_wirelessAdb)
     Switch mWirelessAdbSwitch;
 
-    @Bind(R.id.fab_actionButton)
-    @Nullable
-    FloatingActionButton mActionButton;
-
     private boolean mCheckedChangeActionPrevented;
 
 
@@ -89,31 +82,12 @@ public class MainScreenFragment extends BaseFragment implements ViewInterface, I
 
         if(PreferenceUtility.useSimplifiedLayout(getContext())) {
             contentContainer.setLayoutResource(R.layout.content_main_simple);
-//            rootView = inflater.inflate(R.layout.fragment_main_simple, container);
         }  else {
             contentContainer.setLayoutResource(R.layout.content_main);
-//            rootView = inflater.inflate(R.layout.fragment_main, container);
         }
         contentContainer.inflate();
 
-
-        ViewStub actionButtonContainer = (ViewStub) rootView.findViewById(R.id.action_button_container);
-
-        if(PreferenceUtility.shouldDisplayDonationButton(getContext())) {
-            actionButtonContainer.setLayoutResource(R.layout.floating_action_button);
-            actionButtonContainer.inflate();
-        } else {
-//            actionButtonContainer.setLayoutResource(R.layout.floating_action_button);
-//            actionButtonContainer.inflate();
-            actionButtonContainer.setVisibility(View.GONE);
-        }
-
         ButterKnife.bind(this, rootView);
-
-        if(getActionButton() != null) {
-            getActionButton().setImageResource(R.drawable.ic_donation_white_48dp);
-        }
-
         return rootView;
     }
 
@@ -153,11 +127,6 @@ public class MainScreenFragment extends BaseFragment implements ViewInterface, I
     private void initialize() {
         this.getComponent(MainScreenComponent.class).inject(this);
         getPresenter().setView(this);
-    }
-
-    @OnClick(R.id.fab_actionButton)
-    public void onReloadButtonClicked(View view) {
-        getPresenter().actionButtonClicked(view);
     }
 
     @OnCheckedChanged(R.id.switch_wirelessAdb)
@@ -210,10 +179,5 @@ public class MainScreenFragment extends BaseFragment implements ViewInterface, I
         setCheckedChangeActionPrevented(true);
         getWirelessAdbSwitch().setChecked(wirelessAdbSwitchChecked);
         setCheckedChangeActionPrevented(false);
-    }
-
-    @Override
-    public boolean handleInAppBillingResult(int requestCode, int resultCode, Intent data) {
-        return getPresenter().isInAppBillingResult(requestCode, resultCode, data);
     }
 }
