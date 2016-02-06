@@ -1,3 +1,18 @@
+/**
+ * Copyright (C) 2016 Christoph Hennemann
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.androidbytes.adbconnect.presentation.services;
 
 
@@ -13,16 +28,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
-
 import com.squareup.otto.Subscribe;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import de.androidbytes.adbconnect.R;
 import de.androidbytes.adbconnect.domain.interactor.UseCase;
 import de.androidbytes.adbconnect.domain.interactor.result.AdbConnectRequirementsStateEnum;
@@ -37,11 +43,7 @@ import de.androidbytes.adbconnect.presentation.eventbus.events.AdbConnectRequire
 import de.androidbytes.adbconnect.presentation.eventbus.events.CurrentIpAddressEvaluatedEvent;
 import de.androidbytes.adbconnect.presentation.eventbus.events.ServiceConnectionStateChangedEvent;
 import de.androidbytes.adbconnect.presentation.eventbus.events.WirelessAdbStateEvaluatedEvent;
-import de.androidbytes.adbconnect.presentation.observer.AdbConnectRequirementsObserver;
-import de.androidbytes.adbconnect.presentation.observer.AdbStateObserver;
-import de.androidbytes.adbconnect.presentation.observer.EvaluateCurrentIpAddressObserver;
-import de.androidbytes.adbconnect.presentation.observer.ObserverHandler;
-import de.androidbytes.adbconnect.presentation.observer.UseCaseObserver;
+import de.androidbytes.adbconnect.presentation.observer.*;
 import de.androidbytes.adbconnect.presentation.observer.result.AdbConnectRequirementsObserverResult;
 import de.androidbytes.adbconnect.presentation.observer.result.EvaluateCurrentIpAddressObserverResult;
 import de.androidbytes.adbconnect.presentation.observer.result.ObserverResult;
@@ -56,10 +58,14 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import trikita.log.Log;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-/**
- * Created by Christoph on 26.09.2015.
- */
+
+
 @Accessors(prefix = "m")
 public class WirelessAdbManagingService extends BaseService implements HasComponent<AdbManagingServiceComponent>, ObserverHandler {
 

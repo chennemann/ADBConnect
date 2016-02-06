@@ -1,11 +1,22 @@
+/**
+ * Copyright (C) 2016 Christoph Hennemann
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.androidbytes.adbconnect.presentation.presenter;
 
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,12 +24,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
-
 import com.android.vending.billing.IInAppBillingService;
 import com.squareup.otto.Subscribe;
-
-import javax.inject.Inject;
-
 import de.androidbytes.adbconnect.R;
 import de.androidbytes.adbconnect.domain.interactor.result.AdbStateEnum;
 import de.androidbytes.adbconnect.domain.interactor.result.ConnectionInformation;
@@ -29,11 +36,7 @@ import de.androidbytes.adbconnect.presentation.eventbus.events.CurrentIpAddressE
 import de.androidbytes.adbconnect.presentation.eventbus.events.ServiceConnectionStateChangedEvent;
 import de.androidbytes.adbconnect.presentation.eventbus.events.WirelessAdbStateEvaluatedEvent;
 import de.androidbytes.adbconnect.presentation.services.WirelessAdbManagingService;
-import de.androidbytes.adbconnect.presentation.utils.InAppBillingUtility;
-import de.androidbytes.adbconnect.presentation.utils.InteractionUtility;
-import de.androidbytes.adbconnect.presentation.utils.PreferenceUtility;
-import de.androidbytes.adbconnect.presentation.utils.ServiceUtility;
-import de.androidbytes.adbconnect.presentation.utils.Sku;
+import de.androidbytes.adbconnect.presentation.utils.*;
 import de.androidbytes.adbconnect.presentation.utils.billing.IabHelper;
 import de.androidbytes.adbconnect.presentation.utils.billing.IabResult;
 import de.androidbytes.adbconnect.presentation.utils.billing.Inventory;
@@ -47,20 +50,11 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import trikita.log.Log;
 
-import static de.androidbytes.adbconnect.domain.interactor.result.AdbConnectRequirementsStateEnum.ADB_CONNECT_REQUIREMENTS_AVAILABLE;
-import static de.androidbytes.adbconnect.domain.interactor.result.AdbConnectRequirementsStateEnum.ADB_CONNECT_REQUIREMENT_DEVELOPER_OPTIONS_DISABLED;
-import static de.androidbytes.adbconnect.domain.interactor.result.AdbConnectRequirementsStateEnum.ADB_CONNECT_REQUIREMENT_USB_DEBUGGING_DISABLED;
-import static de.androidbytes.adbconnect.domain.interactor.result.AdbConnectRequirementsStateEnum.ADB_CONNECT_REQUIREMENT_WIFI_NOT_ENABLED;
-import static de.androidbytes.adbconnect.domain.interactor.result.AdbConnectRequirementsStateEnum.ADB_CONNECT_REQUIREMENT_WIFI_STATE_NOT_CONNECTED;
+import javax.inject.Inject;
+
+import static de.androidbytes.adbconnect.domain.interactor.result.AdbConnectRequirementsStateEnum.*;
 import static de.androidbytes.adbconnect.domain.interactor.result.AdbStateEnum.ADB_STATE_WIRELESS_ADB_ACTIVE;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.ADB_OVER_WIFI_DISABLED;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.ADB_OVER_WIFI_DISABLED_NO_ROOT;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.ADB_OVER_WIFI_ENABLED;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.ADB_OVER_WIFI_ENABLED_NO_ROOT;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.DEVELOPER_OPTIONS_DISABLED;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.USB_DEBUGGING_DISABLED;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.WIFI_NOT_CONNECTED;
-import static de.androidbytes.adbconnect.presentation.view.ApplicationState.WIFI_TURNED_OFF;
+import static de.androidbytes.adbconnect.presentation.view.ApplicationState.*;
 
 
 /**
@@ -195,13 +189,6 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
         }
     }
 
-    private void checkWirelessAdbState() {
-
-        if (isWirelessAdbManagingServiceBound()) {
-            getWirelessAdbManagingService().checkCurrentWirelessAdbState();
-        }
-    }
-
     private void toggleWirelessAdbState(boolean setActive) {
 
         if (isWirelessAdbManagingServiceBound()) {
@@ -209,14 +196,7 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
         }
     }
 
-    private void evaluateIp() {
-
-        if (isWirelessAdbManagingServiceBound()) {
-            getWirelessAdbManagingService().evaluateCurrentIpAddress();
-        }
-    }
-
-//endregion
+    //endregion
 
 
 //region Lifecycls Methods
@@ -273,13 +253,14 @@ public class MainScreenPresenter implements Presenter, IabHelper.OnIabSetupFinis
 
 
     public void actionButtonClicked(View view) {
+        if(view.getId() == R.id.fab_actionButton) {
+            Log.i("Purchase Button Clicked");
 
-        Log.i("Purchase Button Clicked");
-
-        if (isInAppBillingReady()) {
-            displayPurchaseDialog();
-        } else {
-            setPurchaseButtonClickedWhileNotReady(true);
+            if (isInAppBillingReady()) {
+                displayPurchaseDialog();
+            } else {
+                setPurchaseButtonClickedWhileNotReady(true);
+            }
         }
     }
 
