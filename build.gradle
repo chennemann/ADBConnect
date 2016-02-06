@@ -13,8 +13,8 @@ buildscript {
 allprojects {
     ext {
         androidApplicationId = 'de.androidbytes.adbconnect'
-        androidVersionCode = 6
-        androidVersionName = "0.5.1"
+        androidVersionCode = 7
+        androidVersionName = "0.6.0"
     }
 }
 

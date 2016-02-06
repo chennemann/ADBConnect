@@ -41,3 +41,6 @@ build
 *.ipr
 *~
 *.swp
+
+# Release Versions
+/release
