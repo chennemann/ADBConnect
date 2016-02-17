@@ -15,3 +15,5 @@ Another reason to develop my own connection application is that I found no other
 Yes, of course you can.
 If there is something you want to improve, simply fork the repository and send me a pull request. Be sure to provide meaningful commit messages. ([See this for reference](https://udacity.github.io/git-styleguide/))
 Or create an issue, where you describe your problem. I will try to fix it as soon as possible.
+
+Resolves: #1
